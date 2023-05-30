@@ -2,10 +2,18 @@ import typeorm from "typeorm";
 
 const { MigrationInterface, QueryRunner } = typeorm;
 
-export default class AddUserTable1684835167994 {
-    name = 'AddUserTable1684835167994'
+export default class  $npmConfigName1685452731429 {
+    name = ' $npmConfigName1685452731429'
 
     async up(queryRunner) {
+        await queryRunner.query(`
+            CREATE TABLE "movie" (
+                "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+                "title" varchar NOT NULL,
+                "date" datetime NOT NULL,
+                CONSTRAINT "UQ_a81090ad0ceb645f30f9399c347" UNIQUE ("title")
+            )
+        `);
         await queryRunner.query(`
             CREATE TABLE "user" (
                 "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -20,6 +28,9 @@ export default class AddUserTable1684835167994 {
     async down(queryRunner) {
         await queryRunner.query(`
             DROP TABLE "user"
+        `);
+        await queryRunner.query(`
+            DROP TABLE "movie"
         `);
     }
 }
